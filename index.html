@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+ 
+function EditarEstudiantes(codigo){
+	var estudiante;
+	
+	for(var i = 0; i < localStorage.length; i++){
+		var clave = localStorage.key(i);
+		if(clave == codigo){
+			codigo = $.parseJSON(localStorage.getItem(clave));
+			
+			$("#codigo").val(estudiante.codigo);
+			$("#nombre").val(estudiante.nombre);
+			$("#nota").val(estudiante.nota);
+		}
+	}
+}
+	
+function listarEstudiantes(){
+	var tabala = "";
+	var parrofo1 = $("#p1");
+	
+	tabla += "<table border ='1'>";
+	tabla += "<tr>";
+	tabla += "<th>CÓDIGO</th>";
+	tabla += "<th>NOMBRE</th>";
+	tabla += "<th>NOTA</th>";
+	tabla += "<th>EDITAR</th>";
+	tabla += "<th>ELIMINAR</th>";
+	tabla += "</tr>";
+	
+	for(var i = 0;i<localStorage.length;i++){
+		var clave = localStorage.key(i);
+		var estudiante = $.parseJSON(localStorage.getItem(clave));
+		
+		tabla +="<tr>";
+		tabla +="<td>"+estudiante.codigo+"</td>"
+		tabla +="<td>"+estudiante.nombre+"</td>"
+		tabla +="<td>"+estudiante.nota+"</td>"
+		tabla +="<td><button onclick='editarEstudiantes('"+estudiante.codigo+"')'>Editar</button><td>";
+		tabla +="<td><button onclick='eliminarEstudiantes('"+estudiante.codigo+"')'>Eliminar</button><td>";
+		tabla += "</tr>";
+		
+	}
+	
+	tabla += "</table>";
+	$(parrofo1).html(tabla);
+}	
+	
+function eliminarEstudiantes(){
+	
+}
+
+
+
+
+
+
+    function eliminarVehiculo(placa) {
+
+
+
+        localStorage.removeItem(placa);
+
+
+        listarNotas();
+
+
+    }
+
+
+
+
+
+
+
+    $(document).ready(function() {
+
+      
+
+
+
+        $("#boton1").click(function() {
+
+
+            var placa = $("#placa").val();
+            var marca = $("#marca").val();
+            var modelo = $("#modelo").val();
+
+            var vehiculo = {
+                placa: placa,
+                marca: marca,
+                modelo: modelo
+            };
+
+
+
+
+
+            localStorage.setItem(placa, JSON.stringify(vehiculo));
+
+            contador = localStorage.length + 1;
+
+
+
+
+
+
+
+            listarVehiculos();
+
+            reestablecer();
+
+
+
+
+
+
+        });
+
+
+        $("#boton2").click(function() {
+
+
+            reestablecer();
+
+
+
+        });
+
+
+        function reestablecer() {
+
+
+            $("#placa").val("");
+            $("#marca").val("");
+            $("#modelo").val("");
+
+
+
+        }
+
+
+
+
+
+        listarVehiculos();
+
+
+
+    });
+</script>
+<title>Evaluación Final</title>
+</head>
+
+<body>
+<h1>Registro de Estudiantes</h1>
+<p>Código:<br>
+  <input type="text" id="codigo">
+  <br>
+  Nombre:<br>
+  <input type="text" id="nombre">
+  <br>
+  Nota:<br>
+  <input type="text" id="nota">
+</p>
+<button id="RegistrarEstudiante">Resgistrar Estudiante</button>
+<button id="MostrarPromedio">Mostrar Promedio</button>
+<button id="NotaMayor">Mostrar Nota Mayor</button>
+<button id="NotaMenor">Mostrar Nota Menor</button>
+<h1>Listado de Estudiantes</h1>
+<p id="view"></p>
+</body>
+</html>
