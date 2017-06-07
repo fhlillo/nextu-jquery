@@ -81,7 +81,55 @@ $(document).ready(function(){
 		contador = localStorage.length + 1;
 		clear();
 		listarEstudiantes();
-	})
+	});
+	
+	$("#MostrarPromedio").click(function(){
+		var prom = 0;
+		for (i = 0; i < localStorage.length; i++) {
+			var clave = localStorage.key(i);
+			var estudiante = $.parseJSON(localStorage.getItem(clave));
+			prom += parseFloat(estudiante.nota);
+		}
+		prom = prom/i;
+		alert("El Promedio es: " + prom);
+	});
+	
+	$("#NotaMayor").click(function(){
+	var NotaMayor = 0;
+	var nom = "";
+	var cod = "";
+	for(i = 0; i < localStorage.length; i++){
+		var clave = localStorage.key(i);
+		var estudiante = $.parseJSON(localStorage.getItem(clave));
+		if(parseFloat(estudiante.nota) > NotaMayor){
+			NotaMayor = estudiante.nota;
+			nom = estudiante.nombre;
+			cod = estudiante.codigo;
+		}
+	}
+	alert("El Alumno con la mayor nota es: " + cod + " | " + nom + " | " + NotaMayor);
+	});
+	
+	$("#NotaMenor").click(function(){
+	var NotaMenor = 0;
+	var nom = "";
+	var cod = "";
+	for(i = 0; i < localStorage.length; i++){
+		var clave = localStorage.key(i);
+		var estudiante = $.parseJSON(localStorage.getItem(clave));
+		if(NotaMenor == 0){
+			NotaMenor = parseFloat(estudiante.nota)
+		}else{
+			if(parseFloat(estudiante.nota) < NotaMenor){
+				NotaMenor = estudiante.nota;
+				nom = estudiante.nombre;
+				cod = estudiante.codigo;
+			}	
+		}
+	}
+	alert("El Alumno con la menor nota es: " + cod + " | " + nom + " | " + NotaMenor);
+	});
+	
 });
 </script>
 <title>Evaluación Final</title>
